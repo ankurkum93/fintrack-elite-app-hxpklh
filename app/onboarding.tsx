@@ -1,6 +1,6 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { View, Text, ScrollView, Dimensions, Animated, TextInput, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, ScrollView, Dimensions, Animated, TextInput, TouchableOpacity } from 'react-native';
 import Button from '../components/Button';
 import { useTheme } from '../context/ThemeContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -187,7 +187,7 @@ export default function Onboarding() {
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <Text style={[commonStyles.text, { marginBottom: 0 }]}>Notifications</Text>
             <TouchableOpacity
-              onPress={() => setNotificationGranted(!(!!user.notificationGranted))}
+              onPress={() => setNotificationGranted(!user.notificationGranted)}
               style={{ paddingVertical: 6, paddingHorizontal: 10, borderRadius: 12, backgroundColor: user.notificationGranted ? colors.accent : 'transparent', borderWidth: user.notificationGranted ? 0 : 1, borderColor: 'rgba(148,163,184,0.18)' }}
             >
               <Text style={{ color: user.notificationGranted ? '#fff' : colors.text, fontWeight: '800' }}>{user.notificationGranted ? 'Granted' : 'Ask Later'}</Text>
@@ -197,7 +197,7 @@ export default function Onboarding() {
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <Text style={[commonStyles.text, { marginBottom: 0 }]}>Account linking</Text>
             <TouchableOpacity
-              onPress={() => setLinkedAccounts(!(!!user.linkedAccounts))}
+              onPress={() => setLinkedAccounts(!user.linkedAccounts)}
               style={{ paddingVertical: 6, paddingHorizontal: 10, borderRadius: 12, backgroundColor: user.linkedAccounts ? colors.accent : 'transparent', borderWidth: user.linkedAccounts ? 0 : 1, borderColor: 'rgba(148,163,184,0.18)' }}
             >
               <Text style={{ color: user.linkedAccounts ? '#fff' : colors.text, fontWeight: '800' }}>{user.linkedAccounts ? 'Enabled' : 'Later'}</Text>
