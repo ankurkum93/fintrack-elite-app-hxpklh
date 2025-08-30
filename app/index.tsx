@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { View, Text, Image, Animated } from 'react-native';
 import { Redirect, router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -12,7 +12,7 @@ export default function Entry() {
   const [checked, setChecked] = useState(false);
   const [shouldOnboard, setShouldOnboard] = useState(false);
   const { commonStyles } = useTheme();
-  const fade = new Animated.Value(0);
+  const fade = useRef(new Animated.Value(0));
 
   useEffect(() => {
     (async () => {
@@ -21,7 +21,7 @@ export default function Entry() {
         const needs = v !== 'true';
         setShouldOnboard(needs);
         setChecked(true);
-        Animated.timing(fade, { toValue: 1, duration: 500, useNativeDriver: true }).start();
+        Animated.timing(fade.current, { toValue: 1, duration: 500, useNativeDriver: true }).start();
       } catch (e) {
         console.log('Onboard check failed', e);
         setChecked(true);
@@ -33,7 +33,7 @@ export default function Entry() {
   if (!shouldOnboard) return <Redirect href="/(tabs)" />;
 
   return (
-    <Animated.View style={[commonStyles.container, { opacity: fade }]}>
+    <Animated.View style={[commonStyles.container, { opacity: fade.current }]}>
       <View style={commonStyles.content}>
         <Image source={require('../assets/images/final_quest_240x240.png')} style={{ width: 140, height: 140 }} resizeMode="contain" />
         <Text style={[commonStyles.title, { marginTop: 12 }]}>Finance Tracker App</Text>

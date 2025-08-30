@@ -13,6 +13,7 @@ type Props = {
 };
 
 const BottomSheetWrapper = forwardRef<BottomSheetWrapperRef, Props>(({ children, snapPoints, onClose }, ref) => {
+  console.log('BottomSheetWrapper render');
   const { colors } = useTheme();
   const points = useMemo(() => snapPoints || ['40%'], [snapPoints]);
 
@@ -39,5 +40,6 @@ const BottomSheetWrapper = forwardRef<BottomSheetWrapperRef, Props>(({ children,
     </BottomSheet>
   );
 });
+BottomSheetWrapper.displayName = 'BottomSheetWrapper';
 
 export default BottomSheetWrapper;
