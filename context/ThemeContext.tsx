@@ -1,9 +1,16 @@
 
 import React, { createContext, useCallback, useContext, useMemo, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { makeCommonStyles, lightColors, darkColors, AppColors } from '../styles/commonStyles';
+import {
+  makeCommonStyles,
+  lightColors,
+  darkColors,
+  AppColors,
+  glassGoldColors,
+  minimalWhiteColors,
+} from '../styles/commonStyles';
 
-type Theme = 'light' | 'dark';
+type Theme = 'light' | 'dark' | 'glassGold' | 'minimalWhite';
 
 type ThemeCtx = {
   theme: Theme;
@@ -18,13 +25,14 @@ const ThemeContext = createContext<ThemeCtx | undefined>(undefined);
 const STORAGE_KEY = 'app_theme';
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setThemeState] = useState<Theme>('light');
+  // Default to dark to match the requested premium first impression
+  const [theme, setThemeState] = useState<Theme>('dark');
 
   useEffect(() => {
     (async () => {
       try {
         const stored = await AsyncStorage.getItem(STORAGE_KEY);
-        if (stored === 'dark' || stored === 'light') {
+        if (stored === 'dark' || stored === 'light' || stored === 'glassGold' || stored === 'minimalWhite') {
           setThemeState(stored);
         }
       } catch (e) {
@@ -39,16 +47,28 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+    setTheme((prev) => {
+      const order: Theme[] = ['dark', 'glassGold', 'minimalWhite', 'light'];
+      const idx = order.indexOf(prev);
+      return order[(idx + 1) % order.length];
+    });
   }, [setTheme]);
 
-  const colors = theme === 'dark' ? darkColors : lightColors;
+  const colors: AppColors =
+    theme === 'dark'
+      ? darkColors
+      : theme === 'glassGold'
+      ? glassGoldColors
+      : theme === 'minimalWhite'
+      ? minimalWhiteColors
+      : lightColors;
+
   const commonStyles = useMemo(() => makeCommonStyles(colors), [colors]);
 
   const value = useMemo(
     () => ({
       theme,
-      isDark: theme === 'dark',
+      isDark: theme === 'dark' || theme === 'glassGold',
       colors,
       commonStyles,
       setTheme,

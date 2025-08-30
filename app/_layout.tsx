@@ -8,6 +8,7 @@ import { setupErrorLogging } from '../utils/errorLogger';
 import { ThemeProvider, useTheme } from '../context/ThemeContext';
 import { TransactionsProvider } from '../context/TransactionsContext';
 import { CardsProvider } from '../context/CardsContext';
+import { UserProvider } from '../context/UserContext';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter';
 
@@ -73,11 +74,13 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <ThemeProvider>
-          <TransactionsProvider>
-            <CardsProvider>
-              <InnerLayout />
-            </CardsProvider>
-          </TransactionsProvider>
+          <UserProvider>
+            <TransactionsProvider>
+              <CardsProvider>
+                <InnerLayout />
+              </CardsProvider>
+            </TransactionsProvider>
+          </UserProvider>
         </ThemeProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

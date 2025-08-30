@@ -25,6 +25,30 @@ export const darkColors = {
   card: '#111927',
 };
 
+// Premium "Glass Gold" theme (dark with gold/emerald accents)
+export const glassGoldColors = {
+  primary: '#D4AF37', // gold
+  secondary: '#065F46', // emerald-800 tint for depth
+  accent: '#10B981', // emerald-500
+  background: '#0A0F1A',
+  backgroundAlt: '#0F172A',
+  text: '#F5F5F5',
+  grey: '#9CA3AF',
+  card: '#0F172A',
+};
+
+// Minimal White theme
+export const minimalWhiteColors = {
+  primary: '#111827',
+  secondary: '#6B7280',
+  accent: '#10B981',
+  background: '#FFFFFF',
+  backgroundAlt: '#F3F4F6',
+  text: '#111827',
+  grey: '#6B7280',
+  card: '#FFFFFF',
+};
+
 export type AppColors = typeof lightColors;
 
 export const makeCommonStyles = (colors: AppColors) => StyleSheet.create({
