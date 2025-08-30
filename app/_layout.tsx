@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { setupErrorLogging } from '../utils/errorLogger';
 import { ThemeProvider, useTheme } from '../context/ThemeContext';
 import { TransactionsProvider } from '../context/TransactionsContext';
+import { CardsProvider } from '../context/CardsContext';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts, Inter_400Regular, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter';
 
@@ -73,7 +74,9 @@ export default function RootLayout() {
       <SafeAreaProvider>
         <ThemeProvider>
           <TransactionsProvider>
-            <InnerLayout />
+            <CardsProvider>
+              <InnerLayout />
+            </CardsProvider>
           </TransactionsProvider>
         </ThemeProvider>
       </SafeAreaProvider>
