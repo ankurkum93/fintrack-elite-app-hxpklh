@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     flexDirection: 'row',
     alignItems: 'center',
-    boxShadow: '0 6px 16px rgba(0,0,0,0.12)',
+    boxShadow: '0 10px 20px rgba(2,6,23,0.12)',
   },
   label: {
     color: 'rgba(255,255,255,0.8)',

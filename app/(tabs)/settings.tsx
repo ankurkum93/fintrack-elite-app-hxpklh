@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, Switch } from 'react-native';
 import { useTheme } from '../../context/ThemeContext';
 import { useTransactions } from '../../context/TransactionsContext';
+import BackdropGradient from '../../components/BackdropGradient';
 
 export default function SettingsScreen() {
   const { commonStyles, colors, theme, toggleTheme } = useTheme();
@@ -10,6 +11,7 @@ export default function SettingsScreen() {
 
   return (
     <View style={[commonStyles.container, { paddingHorizontal: 16 }]}>
+      <BackdropGradient intensity={0.75} />
       <View style={{ marginTop: 12 }}>
         <Text style={[commonStyles.title, { fontSize: 20, textAlign: 'left' }]}>Settings</Text>
       </View>

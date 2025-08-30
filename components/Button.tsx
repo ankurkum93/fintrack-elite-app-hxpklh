@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { Text, TouchableOpacity, StyleSheet, View } from 'react-native';
+import React, { useRef } from 'react';
+import { Text, StyleSheet, View, Animated, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '../context/ThemeContext';
 
@@ -20,18 +20,30 @@ export default function Button({ text, onPress, style, textStyle, variant = 'pri
     ? [colors.accent, colors.primary]
     : undefined;
 
+  const scale = useRef(new Animated.Value(1)).current;
+
+  const handlePressIn = () => {
+    Animated.spring(scale, { toValue: 0.97, useNativeDriver: true, speed: 20 }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.spring(scale, { toValue: 1, useNativeDriver: true, speed: 20 }).start();
+  };
+
   return (
-    <TouchableOpacity style={[styles.touch, style]} onPress={onPress} activeOpacity={0.8}>
+    <Animated.View style={[styles.touch, style, { transform: [{ scale }] }]}>
       {variant === 'ghost' ? (
-        <View style={[styles.button, { backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.primary }]}>
+        <Pressable onPress={onPress} onPressIn={handlePressIn} onPressOut={handlePressOut} style={[styles.button, { backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.primary }]}>
           <Text style={[styles.buttonText, { color: colors.primary }, textStyle]}>{text}</Text>
-        </View>
+        </Pressable>
       ) : (
-        <LinearGradient colors={gradientColors as string[]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[styles.button]}>
-          <Text style={[styles.buttonText, textStyle]}>{text}</Text>
-        </LinearGradient>
+        <Pressable onPress={onPress} onPressIn={handlePressIn} onPressOut={handlePressOut} style={{ width: '100%' }}>
+          <LinearGradient colors={gradientColors as string[]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[styles.button, { boxShadow: '0px 10px 24px rgba(2,6,23,0.18)' as any }]}>
+            <Text style={[styles.buttonText, textStyle]}>{text}</Text>
+          </LinearGradient>
+        </Pressable>
       )}
-    </TouchableOpacity>
+    </Animated.View>
   );
 }
 
@@ -41,10 +53,9 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 14,
-    borderRadius: 12,
+    borderRadius: 14,
     marginTop: 10,
     width: '100%',
-    boxShadow: '0px 6px 16px rgba(0,0,0,0.12)',
     alignItems: 'center',
     justifyContent: 'center',
   },

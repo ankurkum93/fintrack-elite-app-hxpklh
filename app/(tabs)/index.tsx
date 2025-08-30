@@ -11,6 +11,7 @@ import { router } from 'expo-router';
 import BottomSheetWrapper, { BottomSheetWrapperRef } from '../../components/BottomSheetWrapper';
 import { LinearGradient } from 'expo-linear-gradient';
 import MetricChip from '../../components/MetricChip';
+import BackdropGradient from '../../components/BackdropGradient';
 
 export default function Dashboard() {
   const { commonStyles, colors, toggleTheme } = useTheme();
@@ -43,6 +44,7 @@ export default function Dashboard() {
 
   return (
     <View style={[commonStyles.container, { paddingHorizontal: 16 }]}>
+      <BackdropGradient variant="home" intensity={1} />
       <ScrollView contentContainerStyle={{ paddingTop: 10, paddingBottom: 40 }}>
         <View style={[commonStyles.rowBetween, { marginTop: 8 }]}>
           <Text style={[commonStyles.title, { fontSize: 22, textAlign: 'left' }]}>Dashboard</Text>
@@ -55,7 +57,7 @@ export default function Dashboard() {
           colors={[colors.primary, colors.secondary]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          style={{ borderRadius: 20, padding: 16, marginTop: 12, boxShadow: '0px 16px 32px rgba(2,6,23,0.16)' as any }}
+          style={{ borderRadius: 22, padding: 16, marginTop: 12, boxShadow: '0px 22px 44px rgba(2,6,23,0.18)' as any }}
         >
           <Text style={{ color: 'rgba(255,255,255,0.8)', fontWeight: '700' }}>Current balance</Text>
           <Text style={{ color: '#fff', fontSize: 34, fontWeight: '900', marginTop: 4 }}>${balance.toFixed(2)}</Text>
@@ -81,7 +83,7 @@ export default function Dashboard() {
         <View style={[commonStyles.rowBetween, { marginTop: 18 }]}>
           <Text style={[commonStyles.title, { fontSize: 18, textAlign: 'left' }]}>Recent transactions</Text>
           <TouchableOpacity onPress={() => router.push('/transactions')}>
-            <Text style={{ color: colors.accent, fontWeight: '800' }}>See all</Text>
+            <Text style={{ color: '#22C55E', fontWeight: '800' }}>See all</Text>
           </TouchableOpacity>
         </View>
 

@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Button from '../components/Button';
 import { useTheme } from '../context/ThemeContext';
 import { LinearGradient } from 'expo-linear-gradient';
+import BackdropGradient from '../components/BackdropGradient';
 
 const ONBOARD_KEY = 'has_onboarded';
 
@@ -35,6 +36,7 @@ export default function Entry() {
 
   return (
     <Animated.View style={[commonStyles.container, { opacity: fade.current }]}>
+      <BackdropGradient variant="auth" intensity={1} />
       <LinearGradient
         colors={[colors.backgroundAlt, colors.background]}
         start={{ x: 0, y: 0 }}

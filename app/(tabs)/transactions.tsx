@@ -7,6 +7,7 @@ import TransactionItem from '../../components/TransactionItem';
 import Button from '../../components/Button';
 import { router } from 'expo-router';
 import Icon from '../../components/Icon';
+import BackdropGradient from '../../components/BackdropGradient';
 
 export default function TransactionsScreen() {
   const { commonStyles, colors } = useTheme();
@@ -24,6 +25,7 @@ export default function TransactionsScreen() {
 
   return (
     <View style={[commonStyles.container, { paddingHorizontal: 16 }]}>
+      <BackdropGradient intensity={0.8} />
       <View style={{ marginTop: 12 }}>
         <Text style={[commonStyles.title, { fontSize: 20, textAlign: 'left' }]}>Transactions</Text>
       </View>

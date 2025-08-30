@@ -21,6 +21,8 @@ const DoughnutChart = ({ size = 120, strokeWidth = 12, progress, label }: Props)
   const dashGap = circumference - dash;
   const percent = Math.round(clamped * 100);
 
+  const progressColor = clamped > 0.75 ? '#EF4444' : clamped > 0.5 ? '#F59E0B' : colors.accent;
+
   return (
     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
       <View style={{ position: 'relative' }}>
@@ -31,7 +33,7 @@ const DoughnutChart = ({ size = 120, strokeWidth = 12, progress, label }: Props)
               cy={size / 2}
               r={radius}
               stroke={colors.grey}
-              strokeOpacity={0.2}
+              strokeOpacity={0.18}
               strokeWidth={strokeWidth}
               fill="transparent"
             />
@@ -39,7 +41,7 @@ const DoughnutChart = ({ size = 120, strokeWidth = 12, progress, label }: Props)
               cx={size / 2}
               cy={size / 2}
               r={radius}
-              stroke={colors.accent}
+              stroke={progressColor}
               strokeWidth={strokeWidth}
               strokeDasharray={`${dash} ${dashGap}`}
               strokeLinecap="round"

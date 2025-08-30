@@ -8,6 +8,7 @@ import { router } from 'expo-router';
 import * as Haptics from 'expo-haptics';
 import Icon from '../components/Icon';
 import { LinearGradient } from 'expo-linear-gradient';
+import BackdropGradient from '../components/BackdropGradient';
 
 const ONBOARD_KEY = 'has_onboarded';
 
@@ -26,6 +27,7 @@ export default function Onboarding() {
 
   return (
     <View style={[commonStyles.container, { paddingHorizontal: 20 }]}>
+      <BackdropGradient variant="auth" intensity={0.9} />
       <LinearGradient colors={[colors.backgroundAlt, colors.background]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ width: '100%', borderRadius: 20, padding: 16 }}>
         <Text style={[commonStyles.title, { fontSize: 28, textAlign: 'left' }]}>Welcome</Text>
         <Text style={[commonStyles.text, { marginBottom: 20, textAlign: 'left' }]}>Sign in to sync (optional), or continue locally. You can switch theme anytime.</Text>
