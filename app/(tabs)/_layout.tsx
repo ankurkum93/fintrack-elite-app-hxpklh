@@ -12,7 +12,18 @@ export default function TabsLayout() {
         headerShown: false,
         tabBarActiveTintColor: colors.text,
         tabBarInactiveTintColor: colors.grey,
-        tabBarStyle: { backgroundColor: colors.backgroundAlt, borderTopColor: 'transparent' },
+        tabBarStyle: {
+          backgroundColor: colors.backgroundAlt,
+          borderTopColor: 'transparent',
+          position: 'absolute',
+          left: 12,
+          right: 12,
+          bottom: 12,
+          borderRadius: 16,
+          paddingBottom: 6,
+          paddingTop: 6,
+          boxShadow: '0 10px 24px rgba(0,0,0,0.15)' as any,
+        },
       }}
     >
       <Tabs.Screen

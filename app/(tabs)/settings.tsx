@@ -11,7 +11,7 @@ export default function SettingsScreen() {
   return (
     <View style={[commonStyles.container, { paddingHorizontal: 16 }]}>
       <View style={{ marginTop: 12 }}>
-        <Text style={[commonStyles.title, { fontSize: 20 }]}>Settings</Text>
+        <Text style={[commonStyles.title, { fontSize: 20, textAlign: 'left' }]}>Settings</Text>
       </View>
 
       <View style={[commonStyles.card, { marginTop: 12 }]}>

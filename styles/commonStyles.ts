@@ -3,10 +3,10 @@ import { StyleSheet } from 'react-native';
 
 // Light theme (default) - refined palette
 export const lightColors = {
-  primary: '#3B82F6', // blue-500
-  secondary: '#1D4ED8', // blue-700
+  primary: '#6366F1', // indigo-500
+  secondary: '#4338CA', // indigo-700
   accent: '#22C55E', // green-500
-  background: '#F8FAFC', // slate-50
+  background: '#F7F7FB', // softened slate-50
   backgroundAlt: '#FFFFFF',
   text: '#0F172A', // slate-900
   grey: '#94A3B8', // slate-400
@@ -15,8 +15,8 @@ export const lightColors = {
 
 // Dark theme - refined palette
 export const darkColors = {
-  primary: '#60A5FA', // blue-400
-  secondary: '#2563EB', // blue-600
+  primary: '#818CF8', // indigo-400
+  secondary: '#6366F1', // indigo-500
   accent: '#34D399', // green-400
   background: '#0B1220',
   backgroundAlt: '#111927',
@@ -83,13 +83,13 @@ export const makeCommonStyles = (colors: AppColors) => StyleSheet.create({
   },
   card: {
     backgroundColor: colors.backgroundAlt,
-    borderColor: 'rgba(148,163,184,0.25)',
+    borderColor: 'rgba(148,163,184,0.18)',
     borderWidth: 1,
-    borderRadius: 16,
+    borderRadius: 18,
     padding: 16,
     marginVertical: 8,
     width: '100%',
-    boxShadow: '0px 10px 24px rgba(2,6,23,0.06)',
+    boxShadow: '0px 16px 32px rgba(2,6,23,0.07)',
   },
   rowBetween: {
     width: '100%',

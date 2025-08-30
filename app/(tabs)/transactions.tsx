@@ -6,6 +6,7 @@ import { useTransactions } from '../../context/TransactionsContext';
 import TransactionItem from '../../components/TransactionItem';
 import Button from '../../components/Button';
 import { router } from 'expo-router';
+import Icon from '../../components/Icon';
 
 export default function TransactionsScreen() {
   const { commonStyles, colors } = useTheme();
@@ -24,22 +25,29 @@ export default function TransactionsScreen() {
   return (
     <View style={[commonStyles.container, { paddingHorizontal: 16 }]}>
       <View style={{ marginTop: 12 }}>
-        <Text style={[commonStyles.title, { fontSize: 20 }]}>Transactions</Text>
+        <Text style={[commonStyles.title, { fontSize: 20, textAlign: 'left' }]}>Transactions</Text>
       </View>
 
       <View style={[commonStyles.card, { marginTop: 12 }]}>
-        <TextInput
-          placeholder="Search transactions"
-          placeholderTextColor={colors.grey}
-          value={query}
-          onChangeText={setQuery}
-          style={{
-            backgroundColor: colors.background,
-            borderRadius: 10,
-            padding: 12,
-            color: colors.text,
-          }}
-        />
+        <View style={{ position: 'relative' }}>
+          <Icon name="search-outline" size={18} color={colors.grey} />
+          <TextInput
+            placeholder="Search transactions"
+            placeholderTextColor={colors.grey}
+            value={query}
+            onChangeText={setQuery}
+            style={{
+              backgroundColor: colors.background,
+              borderRadius: 12,
+              paddingVertical: 12,
+              paddingLeft: 36,
+              paddingRight: 12,
+              color: colors.text,
+              marginTop: -20,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.06)' as any,
+            }}
+          />
+        </View>
         <View style={{ height: 10 }} />
         <Button text="Add Expense" onPress={() => router.push('/add-expense')} />
       </View>

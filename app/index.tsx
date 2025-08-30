@@ -5,13 +5,14 @@ import { Redirect, router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Button from '../components/Button';
 import { useTheme } from '../context/ThemeContext';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const ONBOARD_KEY = 'has_onboarded';
 
 export default function Entry() {
   const [checked, setChecked] = useState(false);
   const [shouldOnboard, setShouldOnboard] = useState(false);
-  const { commonStyles } = useTheme();
+  const { commonStyles, colors } = useTheme();
   const fade = useRef(new Animated.Value(0));
 
   useEffect(() => {
@@ -34,14 +35,19 @@ export default function Entry() {
 
   return (
     <Animated.View style={[commonStyles.container, { opacity: fade.current }]}>
-      <View style={commonStyles.content}>
+      <LinearGradient
+        colors={[colors.backgroundAlt, colors.background]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={[commonStyles.content, { paddingHorizontal: 20, borderRadius: 20 }]}
+      >
         <Image source={require('../assets/images/final_quest_240x240.png')} style={{ width: 140, height: 140 }} resizeMode="contain" />
         <Text style={[commonStyles.title, { marginTop: 12 }]}>Finance Tracker App</Text>
         <Text style={[commonStyles.text, { maxWidth: 320 }]}>Track expenses manually or automatically, visualize insights, and stay in control.</Text>
         <View style={commonStyles.buttonContainer}>
           <Button text="Get Started" onPress={() => router.push('/onboarding')} />
         </View>
-      </View>
+      </LinearGradient>
     </Animated.View>
   );
 }
