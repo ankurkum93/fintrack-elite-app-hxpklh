@@ -29,7 +29,7 @@ export default function Entry() {
         setChecked(true);
       }
     })();
-  }, []);
+  }, [fade]);
 
   if (!checked) return null;
   if (!shouldOnboard) return <Redirect href="/(tabs)" />;
@@ -45,7 +45,7 @@ export default function Entry() {
       >
         <Image source={require('../assets/images/final_quest_240x240.png')} style={{ width: 140, height: 140 }} resizeMode="contain" />
         <Text style={[commonStyles.title, { marginTop: 12 }]}>Finance Tracker App</Text>
-        <Text style={[commonStyles.text, { maxWidth: 320 }]}>Track expenses manually or automatically, visualize insights, and stay in control.</Text>
+        <Text style={[commonStyles.text, { maxWidth: 320, opacity: 0.9 }]}>Track expenses manually or automatically, visualize insights, and stay in control.</Text>
         <View style={commonStyles.buttonContainer}>
           <Button text="Get Started" onPress={() => router.push('/onboarding')} />
         </View>

@@ -9,6 +9,7 @@ import * as Haptics from 'expo-haptics';
 import Icon from '../components/Icon';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackdropGradient from '../components/BackdropGradient';
+import GlassCard from '../components/GlassCard';
 
 const ONBOARD_KEY = 'has_onboarded';
 
@@ -30,9 +31,9 @@ export default function Onboarding() {
       <BackdropGradient variant="auth" intensity={0.9} />
       <LinearGradient colors={[colors.backgroundAlt, colors.background]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ width: '100%', borderRadius: 20, padding: 16 }}>
         <Text style={[commonStyles.title, { fontSize: 28, textAlign: 'left' }]}>Welcome</Text>
-        <Text style={[commonStyles.text, { marginBottom: 20, textAlign: 'left' }]}>Sign in to sync (optional), or continue locally. You can switch theme anytime.</Text>
+        <Text style={[commonStyles.text, { marginBottom: 20, textAlign: 'left', opacity: 0.9 }]}>Sign in to sync (optional), or continue locally. You can switch theme anytime.</Text>
 
-        <View style={[commonStyles.card, { marginTop: 12 }]}>
+        <GlassCard style={{ marginTop: 12 }}>
           <Text style={[commonStyles.text, { marginBottom: 10 }]}>Sign in with</Text>
           <View style={{ flexDirection: 'row', columnGap: 10 }}>
             <View style={{ flex: 1 }}>
@@ -43,12 +44,12 @@ export default function Onboarding() {
             </View>
           </View>
           <Text style={[commonStyles.text, { marginTop: 10, opacity: 0.7 }]}>Authentication is optional in this version.</Text>
-        </View>
+        </GlassCard>
 
-        <View style={[commonStyles.card, { marginTop: 12 }]}>
+        <GlassCard style={{ marginTop: 12 }}>
           <Text style={[commonStyles.text, { marginBottom: 10 }]}>Theme</Text>
           <Button text="Toggle Dark/Light" onPress={toggleTheme} variant="ghost" />
-        </View>
+        </GlassCard>
 
         <View style={{ height: 20 }} />
 

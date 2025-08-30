@@ -8,6 +8,7 @@ import Button from '../../components/Button';
 import { router } from 'expo-router';
 import Icon from '../../components/Icon';
 import BackdropGradient from '../../components/BackdropGradient';
+import GlassCard from '../../components/GlassCard';
 
 export default function TransactionsScreen() {
   const { commonStyles, colors } = useTheme();
@@ -30,29 +31,31 @@ export default function TransactionsScreen() {
         <Text style={[commonStyles.title, { fontSize: 20, textAlign: 'left' }]}>Transactions</Text>
       </View>
 
-      <View style={[commonStyles.card, { marginTop: 12 }]}>
+      <GlassCard style={{ marginTop: 12 }}>
         <View style={{ position: 'relative' }}>
-          <Icon name="search-outline" size={18} color={colors.grey} />
+          <View style={{ position: 'absolute', left: 10, top: 12 }}>
+            <Icon name="search-outline" size={18} color={colors.grey} />
+          </View>
           <TextInput
             placeholder="Search transactions"
             placeholderTextColor={colors.grey}
             value={query}
             onChangeText={setQuery}
             style={{
-              backgroundColor: colors.background,
+              backgroundColor: 'transparent',
               borderRadius: 12,
               paddingVertical: 12,
               paddingLeft: 36,
               paddingRight: 12,
               color: colors.text,
-              marginTop: -20,
-              boxShadow: '0 2px 8px rgba(0,0,0,0.06)' as any,
+              borderWidth: 1,
+              borderColor: 'rgba(148,163,184,0.18)',
             }}
           />
         </View>
         <View style={{ height: 10 }} />
         <Button text="Add Expense" onPress={() => router.push('/add-expense')} />
-      </View>
+      </GlassCard>
 
       <ScrollView contentContainerStyle={{ paddingVertical: 10 }}>
         {filtered.map((t) => (
