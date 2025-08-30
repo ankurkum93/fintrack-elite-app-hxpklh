@@ -1,63 +1,47 @@
-import { Text, View, Image, SafeAreaView } from 'react-native';
-import { router } from 'expo-router';
-import { useState, useEffect } from 'react';
+
+import { useEffect, useState } from 'react';
+import { View, Text, Image, Animated } from 'react-native';
+import { Redirect, router } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Button from '../components/Button';
-import { commonStyles, buttonStyles } from '../styles/commonStyles';
+import { useTheme } from '../context/ThemeContext';
 
-// Declare the window properties we're using
-declare global {
-  interface Window {
-    handleInstallClick: () => void;
-    canInstall: boolean;
-  }
-}
+const ONBOARD_KEY = 'has_onboarded';
 
-export default function MainScreen() {
-  const [canInstall, setCanInstall] = useState(false);
+export default function Entry() {
+  const [checked, setChecked] = useState(false);
+  const [shouldOnboard, setShouldOnboard] = useState(false);
+  const { commonStyles } = useTheme();
+  const fade = new Animated.Value(0);
 
   useEffect(() => {
-    // Initial check
-    setCanInstall(false);
-
-    // Set up polling interval
-    const intervalId = setInterval(() => {
-      if(window.canInstall) {
-        setCanInstall(true);
-        clearInterval(intervalId);
+    (async () => {
+      try {
+        const v = await AsyncStorage.getItem(ONBOARD_KEY);
+        const needs = v !== 'true';
+        setShouldOnboard(needs);
+        setChecked(true);
+        Animated.timing(fade, { toValue: 1, duration: 500, useNativeDriver: true }).start();
+      } catch (e) {
+        console.log('Onboard check failed', e);
+        setChecked(true);
       }
-    }, 500);
-
-    // Cleanup
-    return () => {
-      clearInterval(intervalId);
-    };
+    })();
   }, []);
 
+  if (!checked) return null;
+  if (!shouldOnboard) return <Redirect href="/(tabs)" />;
+
   return (
-    <View style={commonStyles.container}>
+    <Animated.View style={[commonStyles.container, { opacity: fade }]}>
       <View style={commonStyles.content}>
-        <Image
-          source={require('../assets/images/final_quest_240x240.png')}
-          style={{ width: 180, height: 180 }}
-          resizeMode="contain"
-        />
-        <Text style={commonStyles.title}>This is a placeholder app.</Text>
-        <Text style={commonStyles.text}>Your app will be displayed here when it's ready.</Text>
+        <Image source={require('../assets/images/final_quest_240x240.png')} style={{ width: 140, height: 140 }} resizeMode="contain" />
+        <Text style={[commonStyles.title, { marginTop: 12 }]}>Finance Tracker App</Text>
+        <Text style={[commonStyles.text, { maxWidth: 320 }]}>Track expenses manually or automatically, visualize insights, and stay in control.</Text>
         <View style={commonStyles.buttonContainer}>
-          {canInstall && (
-            <Button
-              text="Install App"
-              onPress={() => {
-                if(window.handleInstallClick) {
-                  window.handleInstallClick();
-                  setCanInstall(false); // Update state after installation
-                }
-              }}
-              style={buttonStyles.instructionsButton}
-            />
-          )}
+          <Button text="Get Started" onPress={() => router.push('/onboarding')} />
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 }
