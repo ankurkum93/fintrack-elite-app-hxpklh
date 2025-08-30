@@ -192,7 +192,7 @@ export default function AddExpense() {
       </View>
 
       <View style={{ marginTop: 8 }}>
-        <Button text="Back" onPress={() => router.back()} variant="ghost" />
+        <Button text="Back to Home" onPress={() => router.replace('/(tabs)')} variant="ghost" />
       </View>
     </View>
   );
